@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :movies
   resources :tv_shows
   resources :posters
+  resources :genres
+  resources :people
+
   get 'trending_movies', to: 'movies#trending_movies'
   get 'trending_tv_shows', to: 'tv_shows#trending_tv_shows'
 end
