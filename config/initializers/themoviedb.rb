@@ -1,0 +1,1 @@
+Tmdb::Api.key('195fb6ea36dfb8f3d14ecf241ef467f8')

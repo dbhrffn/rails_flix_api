@@ -1,0 +1,23 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  username: root
+  password: 1234
+  host: localhost
+  port: 3306
+
+development:
+  <<: *default
+  database: rails_flix_dev
+
+test:
+  <<: *default
+  database: rails_flix_test
+
+production:
+  <<: *default
+  database: rails_flix_prod
+  username: root
+  password: 1234
+  host: host.docker.internal
+  port: 3306
