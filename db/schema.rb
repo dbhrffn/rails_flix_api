@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_31_164208) do
+ActiveRecord::Schema.define(version: 2024_09_05_235903) do
 
   create_table "administrators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "email"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2024_08_31_164208) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["release_date"], name: "index_movies_on_release_date"
+    t.index ["title", "tagline", "overview"], name: "index_movies_on_title_and_tagline_and_overview", type: :fulltext
     t.index ["title"], name: "index_movies_on_title"
     t.index ["tmdb_id"], name: "index_movies_on_tmdb_id"
     t.index ["vote_average"], name: "index_movies_on_vote_average"
@@ -100,7 +101,7 @@ ActiveRecord::Schema.define(version: 2024_08_31_164208) do
     t.string "profile_path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_people_on_name"
+    t.index ["name"], name: "index_people_on_name", type: :fulltext
     t.index ["tmdb_id"], name: "index_people_on_tmdb_id"
   end
 
@@ -132,6 +133,7 @@ ActiveRecord::Schema.define(version: 2024_08_31_164208) do
     t.integer "vote_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "overview"], name: "index_tv_shows_on_name_and_overview", type: :fulltext
     t.index ["name"], name: "index_tv_shows_on_name"
     t.index ["tmdb_id"], name: "index_tv_shows_on_tmdb_id"
     t.index ["vote_average"], name: "index_tv_shows_on_vote_average"

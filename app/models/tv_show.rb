@@ -1,9 +1,6 @@
 class TvShow < ApplicationRecord
     include Media
   
-    include PgSearch::Model
-    pg_search_scope :pg_search, against: [:name, :overview], using: { tsearch: { prefix: true, tsvector_column: "tsv" } }
-  
     STATUSES = [
       'Returning Series',
       'Planned',
@@ -22,5 +19,9 @@ class TvShow < ApplicationRecord
   
     def tmdb_url
       "https://www.themoviedb.org/tv/#{tmdb_id}"
+    end
+    
+    def self.full_text_search(query)
+      where("MATCH(name, overview) AGAINST(? IN BOOLEAN MODE)", query)
     end
   end

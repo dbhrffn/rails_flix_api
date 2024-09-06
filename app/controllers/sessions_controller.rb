@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-      # Skip CSRF protection for API requests
+  # Skip CSRF protection for API requests
   skip_before_action :verify_authenticity_token, only: [:create, :destroy]
 
     def create
@@ -14,7 +14,6 @@ class SessionsController < ApplicationController
     end
   
     def destroy
-      # For logout, you might handle token invalidation or just handle it client-side
       head :no_content
     end
   end

@@ -45,5 +45,9 @@ class MoviesController < MediaController
       }
     end
 
+    def search
+      @movies = Movie.full_text_search(params[:query])
+      render json: @movies
+    end
   end
   

@@ -1,7 +1,4 @@
 class Person < ApplicationRecord
-    include PgSearch::Model
-    pg_search_scope :pg_search, against: [:name], using: { tsearch: { prefix: true, tsvector_column: "tsv" } }
-  
     has_many :credits
   
     scope :alphabetical, -> { order(name: :asc) }
@@ -26,5 +23,9 @@ class Person < ApplicationRecord
         find_or_create_by(tmdb_id: tmdb_id) do |person|
         person.attributes = attrs
       end
+    end
+
+    def self.full_text_search(query)
+      where("MATCH(name) AGAINST(? IN BOOLEAN MODE)", query)
     end
   end

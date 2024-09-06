@@ -37,7 +37,6 @@ gem 'sprockets-rails', '>= 2.0.0'
 gem 'rack-cors', require: 'rack/cors'
 gem 'vite_rails'
 
-gem 'pg_search'        # For full-text search
 gem 'themoviedb-api'   # For interacting with TheMovieDB API
 
 group :development, :test do

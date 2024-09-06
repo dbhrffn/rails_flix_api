@@ -1,9 +1,6 @@
 class Movie < ApplicationRecord
   include Media
 
-  include PgSearch::Model
-  pg_search_scope :pg_search, against: [:title, :tagline, :overview], using: { tsearch: { prefix: true, tsvector_column: "tsv" } }
-
   STATUSES = [
     "Rumored",
     "Planned",
@@ -17,6 +14,10 @@ class Movie < ApplicationRecord
 
   validates :title, :status, presence: true
   validates :tmdb_id, uniqueness: { allow_blank: true }
+
+  def self.full_text_search(query)
+    where("MATCH(title, tagline, overview) AGAINST(? IN BOOLEAN MODE)", query)
+  end
 
   def to_param
     [id, title.parameterize].join("-")

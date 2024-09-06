@@ -45,4 +45,9 @@ class TvShowsController < MediaController
         backdrops: @backdrops,
       }
     end
+
+    def search
+      @tv_shows = TvShow.full_text_search(params[:query])
+      render json: @tv_shows
+    end
 end

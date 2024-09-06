@@ -10,4 +10,9 @@ class PeopleController < ApplicationController
           }
         }
     end
+
+    def search
+      @people = Person.full_text_search(params[:query])
+      render json: @people
+    end
 end
